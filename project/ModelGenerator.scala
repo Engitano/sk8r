@@ -35,7 +35,7 @@ class ModelGenerator(swagger: Swagger) {
   )(
       properties: Map[String, Property]
   ): List[Term.Param] = {
-    properties.toList.map {
+    properties.toList.sortBy(!_._2.getRequired).map {
       case (pname, prop) =>
         val default = if (prop.getRequired) None else Some(Term.Name("None"))
         Term.Param(
