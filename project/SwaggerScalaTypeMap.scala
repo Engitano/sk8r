@@ -22,9 +22,9 @@ class SwaggerScalaTypeMap(swagger: Swagger) {
       case _: LongProperty        => t"Long"
       case _: BaseIntegerProperty => t"Int"
       case m: MapProperty =>
-        t"Map[String, ${map(m.getAdditionalProperties)}]"
+        t"Map[String, ${mapNonOptional(m.getAdditionalProperties)}]"
       case a: ArrayProperty =>
-        t"Seq[${map(a.getItems)}]"
+        t"Seq[${mapNonOptional(a.getItems)}]"
       case _: DecimalProperty => t"BigDecimal"
       case r: RefProperty =>
         val targetModel = swagger.getDefinitions.asScala(r.getSimpleRef())

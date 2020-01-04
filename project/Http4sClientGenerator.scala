@@ -105,7 +105,7 @@ class Http4sClientGenerator(swagger: Swagger) {
               .getResponses()
               .asScala
               .collectFirst {
-                case (c, r) if c.startsWith("20") => mapper.map(r.getSchema())
+                case (c, r) if c.startsWith("20") => mapper.mapNonOptional(r.getSchema())
               }
               .getOrElse(Type.Name("Unit"))
 
