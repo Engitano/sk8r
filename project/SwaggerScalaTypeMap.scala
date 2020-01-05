@@ -5,14 +5,25 @@ import scala.meta._
 import scala.collection.JavaConverters._
 
 class SwaggerScalaTypeMap(swagger: Swagger) {
+
+  def isType(what: String, thisType: Type): Boolean = {
+    thisType match {
+      case Type.Apply(name, _) => name.syntax == what
+      case _                   => false
+    }
+  }
+
+  def isOption(thisType: Type): Boolean = isType("Option", thisType)
+
   def map(p: Property): Type = {
-    if (!p.getRequired)
+    if (!p.getRequired && !p.isInstanceOf[MapProperty] && !p
+          .isInstanceOf[ArrayProperty])
       t"Option[${mapNonOptional(p)}]"
     else
       mapNonOptional(p)
   }
 
-    def mapNonOptional(p: Property): Type = {
+  def mapNonOptional(p: Property): Type = {
     p match {
       case _: StringProperty      => t"String"
       case _: BooleanProperty     => t"Boolean"

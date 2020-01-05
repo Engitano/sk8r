@@ -35,17 +35,23 @@ class ModelGenerator(swagger: Swagger) {
   )(
       properties: Map[String, Property]
   ): List[Term.Param] = {
-    properties.toList.sortBy(!_._2.getRequired).map {
+    properties.toList.map {
       case (pname, prop) =>
-        val default = if (prop.getRequired) None else Some(Term.Name("None"))
+      val tpe = mapper.map(prop)
+        val default = prop match {
+          case _:ArrayProperty => Some(q"Seq()")
+          case _:MapProperty => Some(q"Map()")
+          case _ if (!prop.getRequired) => Some(q"None")
+          case _ => None
+        }
         Term.Param(
           List.empty,
           Name(pname),
-          Some(mapper.map(prop)),
+          Some(tpe),
           default
         )
     }
-  }
+  }.sortBy(!_.default.isDefined)
 
   def generateStatement(
       models: Map[String, Model]
