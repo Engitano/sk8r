@@ -39,13 +39,14 @@ class Http4sClientGenerator(swagger: Swagger) {
   ): List[Stat] = {
     val funcs = swagger.getPaths.asScala.flatMap {
       case (uri, path) =>
-        path.getOperationMap().asScala.filter(!_._2.getOperationId.contains("beta")).toMap.map {
+        path.getOperationMap().asScala.toMap.map {
           case (method, operation) =>
             val funcName         = operation.getOperationId
             val uriConstSegments = uri.split("\\{[^\\}]+\\}", -1).toList
             val queryParams = operation
               .getParameters
               .asScala
+              .filter(_.getName != "pretty")
               .collect {
                 case p: QueryParameter =>
                   val prop =
@@ -103,6 +104,12 @@ class Http4sClientGenerator(swagger: Swagger) {
               Term.Name("Method"),
               Term.Name(method.toString().toUpperCase())
             )
+            val reqTerm = q"Request[F](method = ${reqMethod}, uri = ${if(queryParams.nonEmpty) q"baseUri.withPath(${reqPath}).setQueryParams[String, String](${query})" else q"baseUri.withPath(${reqPath})"}, headers = headers)"
+            val reqWithBody = if(bodyParams.nonEmpty) {
+              q"${reqTerm}.withEntity(${Term.Name(bodyParams.head.name.value)})"
+            } else {
+              reqTerm
+            }
             // val addBody = if(bodyParams.nonEmpty) q"withBody(${Term.Name(bodyParams.head.name.value)})" else q""
             (
               q"def ${Term.Name(funcName)}(..${pathParams.toList ++ bodyParams.toList ++ queryParams.toList}): F[$resultType]",
@@ -110,9 +117,8 @@ class Http4sClientGenerator(swagger: Swagger) {
                 .Name(funcName)}(..${pathParams.toList ++ bodyParams.toList ++ queryParams.toList}): F[$resultType] = 
                 tokenSource.getBearerToken.flatMap { bearerToken =>
                   val headers = $headerTerm
-                  val request = Request[F](method = ${reqMethod}, uri = baseUri.withPath(${reqPath}).setQueryParams[String, String](${query}), headers = headers)
-                  val requestWithBody = ${if(bodyParams.nonEmpty) q"request.withEntity(${Term.Name(bodyParams.head.name.value)})" else q"request" } 
-                  httpClient.expect[${resultType}](requestWithBody)
+                  val request = ${reqWithBody}  
+                  httpClient.expect[${resultType}](request)
                 }"""
             )
         }
