@@ -20,6 +20,7 @@
         ],
         "classpath" : [
             "/home/mark/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/protocol_2.12/1.3.3/protocol_2.12-1.3.3.jar",
+            "/home/mark/.cache/coursier/v1/https/repo1.maven.org/maven2/io/netty/netty/3.10.0.Final/netty-3.10.0.Final.jar",
             "/home/mark/.cache/coursier/v1/https/repo1.maven.org/maven2/io/swagger/swagger-annotations/1.6.0/swagger-annotations-1.6.0.jar",
             "/home/mark/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/util-position_2.12/1.3.2/util-position_2.12-1.3.2.jar",
             "/home/mark/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/actions_2.12/1.3.3/actions_2.12-1.3.3.jar",
@@ -37,6 +38,7 @@
             "/home/mark/.cache/coursier/v1/https/repo1.maven.org/maven2/com/squareup/okio/okio/1.17.2/okio-1.17.2.jar",
             "/home/mark/.cache/coursier/v1/https/repo1.maven.org/maven2/org/apache/commons/commons-lang3/3.2.1/commons-lang3-3.2.1.jar",
             "/home/mark/.cache/coursier/v1/https/repo1.maven.org/maven2/io/swagger/swagger-parser/1.0.48/swagger-parser-1.0.48.jar",
+            "/home/mark/.cache/coursier/v1/https/repo1.maven.org/maven2/org/json4s/json4s-core_2.12/3.4.2/json4s-core_2.12-3.4.2.jar",
             "/home/mark/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scalameta/trees_2.12/4.3.0/trees_2.12-4.3.0.jar",
             "/home/mark/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/modules/scala-parser-combinators_2.12/1.1.2/scala-parser-combinators_2.12-1.1.2.jar",
             "/home/mark/.cache/coursier/v1/https/repo1.maven.org/maven2/com/lihaoyi/fastparse_2.12/2.1.3/fastparse_2.12-2.1.3.jar",
@@ -46,6 +48,7 @@
             "/home/mark/.cache/coursier/v1/https/repo1.maven.org/maven2/com/eed3si9n/shaded-scalajson_2.12/1.0.0-M4/shaded-scalajson_2.12-1.0.0-M4.jar",
             "/home/mark/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/zinc-compile-core_2.12/1.3.1/zinc-compile-core_2.12-1.3.1.jar",
             "/home/mark/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/main_2.12/1.3.3/main_2.12-1.3.3.jar",
+            "/home/mark/.cache/coursier/v1/https/repo1.maven.org/maven2/org/foundweekends/bintry_2.12/0.5.2/bintry_2.12-0.5.2.jar",
             "/home/mark/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/collections_2.12/1.3.3/collections_2.12-1.3.3.jar",
             "/home/mark/.cache/coursier/v1/https/repo1.maven.org/maven2/io/circe/circe-derivation_2.12/0.9.0-M3/circe-derivation_2.12-0.9.0-M3.jar",
             "/home/mark/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/compiler-bridge_2.12/1.3.1/compiler-bridge_2.12-1.3.1.jar",
@@ -62,6 +65,7 @@
             "/home/mark/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scalameta/parsers_2.12/4.3.0/parsers_2.12-4.3.0.jar",
             "/home/mark/.cache/coursier/v1/https/repo1.maven.org/maven2/io/swagger/swagger-models/1.6.0/swagger-models-1.6.0.jar",
             "/home/mark/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/launcher-interface/1.1.3/launcher-interface-1.1.3.jar",
+            "/home/mark/.cache/coursier/v1/https/repo1.maven.org/maven2/net/databinder/dispatch/dispatch-core_2.12/0.12.0/dispatch-core_2.12-0.12.0.jar",
             "/home/mark/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/main-settings_2.12/1.3.3/main-settings_2.12-1.3.3.jar",
             "/home/mark/.cache/coursier/v1/https/repo1.maven.org/maven2/com/github/ben-manes/caffeine/caffeine/2.5.6/caffeine-2.5.6.jar",
             "/home/mark/.cache/coursier/v1/https/repo1.maven.org/maven2/com/google/j2objc/j2objc-annotations/1.1/j2objc-annotations-1.1.jar",
@@ -87,16 +91,21 @@
             "/home/mark/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/zinc-apiinfo_2.12/1.3.1/zinc-apiinfo_2.12-1.3.1.jar",
             "/home/mark/.cache/coursier/v1/https/repo1.maven.org/maven2/jline/jline/2.14.6/jline-2.14.6.jar",
             "/home/mark/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/zinc-classpath_2.12/1.3.1/zinc-classpath_2.12-1.3.1.jar",
+            "/home/mark/.cache/coursier/v1/https/repo1.maven.org/maven2/com/ning/async-http-client/1.9.11/async-http-client-1.9.11.jar",
             "/home/mark/.cache/coursier/v1/https/repo1.maven.org/maven2/com/swoval/file-tree-views/2.1.3/file-tree-views-2.1.3.jar",
             "/home/mark/.cache/coursier/v1/https/repo1.maven.org/maven2/com/eed3si9n/gigahorse-core_2.12/0.5.0/gigahorse-core_2.12-0.5.0.jar",
             "/home/mark/.cache/coursier/v1/https/repo1.maven.org/maven2/com/eed3si9n/sjson-new-scalajson_2.12/0.8.3/sjson-new-scalajson_2.12-0.8.3.jar",
+            "/home/mark/.cache/coursier/v1/https/repo1.maven.org/maven2/net/databinder/dispatch/dispatch-json4s-native_2.12/0.12.0/dispatch-json4s-native_2.12-0.12.0.jar",
+            "/home/mark/.cache/coursier/v1/https/repo1.maven.org/maven2/com/thoughtworks/paranamer/paranamer/2.8/paranamer-2.8.jar",
             "/home/mark/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/io_2.12/1.3.1/io_2.12-1.3.1.jar",
             "/home/mark/.cache/coursier/v1/https/repo1.maven.org/maven2/com/google/guava/guava/27.0.1-android/guava-27.0.1-android.jar",
             "/home/mark/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/modules/scala-xml_2.12/1.2.0/scala-xml_2.12-1.2.0.jar",
             "/home/mark/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/completion_2.12/1.3.3/completion_2.12-1.3.3.jar",
             "/home/mark/.cache/coursier/v1/https/repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson-databind/2.10.1/jackson-databind-2.10.1.jar",
+            "/home/mark/.cache/coursier/v1/https/repo1.maven.org/maven2/org/json4s/json4s-scalap_2.12/3.4.2/json4s-scalap_2.12-3.4.2.jar",
             "/home/mark/.cache/coursier/v1/https/repo1.maven.org/maven2/com/lmax/disruptor/3.4.2/disruptor-3.4.2.jar",
             "/home/mark/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/zinc-lm-integration_2.12/1.3.3/zinc-lm-integration_2.12-1.3.3.jar",
+            "/home/mark/.cache/coursier/v1/https/repo1.maven.org/maven2/org/slf4j/slf4j-nop/1.7.7/slf4j-nop-1.7.7.jar",
             "/home/mark/.cache/coursier/v1/https/repo1.maven.org/maven2/com/google/guava/listenablefuture/9999.0-empty-to-avoid-conflict-with-guava/listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar",
             "/home/mark/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/template-resolver/0.1/template-resolver-0.1.jar",
             "/home/mark/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/util-tracking_2.12/1.3.2/util-tracking_2.12-1.3.2.jar",
@@ -140,13 +149,16 @@
             "/home/mark/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/scripted-plugin_2.12/1.3.3/scripted-plugin_2.12-1.3.3.jar",
             "/home/mark/.sbt/boot/scala-2.12.10/lib/scala-compiler.jar",
             "/home/mark/.cache/coursier/v1/https/repo1.maven.org/maven2/com/eed3si9n/sjson-new-core_2.12/0.8.3/sjson-new-core_2.12-0.8.3.jar",
+            "/home/mark/.cache/coursier/v1/https/repo.scala-sbt.org/scalasbt/sbt-plugin-releases/org.foundweekends/sbt-bintray/scala_2.12/sbt_1.0/0.5.4/jars/sbt-bintray.jar",
             "/home/mark/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/ipcsocket/ipcsocket/1.0.0/ipcsocket-1.0.0.jar",
             "/home/mark/.cache/coursier/v1/https/repo1.maven.org/maven2/commons-io/commons-io/2.4/commons-io-2.4.jar",
             "/home/mark/.cache/coursier/v1/https/repo1.maven.org/maven2/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar",
+            "/home/mark/.cache/coursier/v1/https/repo1.maven.org/maven2/org/json4s/json4s-native_2.12/3.4.2/json4s-native_2.12-3.4.2.jar",
             "/home/mark/.sbt/boot/scala-2.12.10/lib/scala-reflect.jar",
             "/home/mark/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scalameta/sbt-metals_2.12_1.0/0.7.6/sbt-metals-0.7.6.jar",
             "/home/mark/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/scalap/2.12.10/scalap-2.12.10.jar",
             "/home/mark/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scalameta/common_2.12/4.3.0/common_2.12-4.3.0.jar",
+            "/home/mark/.cache/coursier/v1/https/repo1.maven.org/maven2/org/json4s/json4s-ast_2.12/3.4.2/json4s-ast_2.12-3.4.2.jar",
             "/home/mark/.cache/coursier/v1/https/repo1.maven.org/maven2/net/java/dev/jna/jna-platform/4.5.0/jna-platform-4.5.0.jar"
         ],
         "out" : "/home/mark/projects/sk8r/project/.bloop/sk8r-build",
@@ -190,8 +202,8 @@
                 "import _root_.sbt._",
                 "import _root_.sbt.Keys._",
                 "import _root_.sbt.nio.Keys._",
-                "import _root_.sbt.ScriptedPlugin.autoImport._, _root_.bloop.integrations.sbt.BloopPlugin.autoImport._, _root_.net.virtualvoid.sbt.graph.DependencyGraphPlugin.autoImport._",
-                "import _root_.sbt.plugins.IvyPlugin, _root_.sbt.plugins.JvmPlugin, _root_.sbt.plugins.CorePlugin, _root_.sbt.ScriptedPlugin, _root_.sbt.plugins.SbtPlugin, _root_.sbt.plugins.SemanticdbPlugin, _root_.sbt.plugins.JUnitXmlReportPlugin, _root_.sbt.plugins.Giter8TemplatePlugin, _root_.bloop.integrations.sbt.BloopPlugin, _root_.net.virtualvoid.sbt.graph.DependencyGraphPlugin, _root_.scala.meta.metals.MetalsPlugin"
+                "import _root_.sbt.ScriptedPlugin.autoImport._, _root_.bloop.integrations.sbt.BloopPlugin.autoImport._, _root_.net.virtualvoid.sbt.graph.DependencyGraphPlugin.autoImport._, _root_.bintray.BintrayPlugin.autoImport._",
+                "import _root_.sbt.plugins.IvyPlugin, _root_.sbt.plugins.JvmPlugin, _root_.sbt.plugins.CorePlugin, _root_.sbt.ScriptedPlugin, _root_.sbt.plugins.SbtPlugin, _root_.sbt.plugins.SemanticdbPlugin, _root_.sbt.plugins.JUnitXmlReportPlugin, _root_.sbt.plugins.Giter8TemplatePlugin, _root_.bloop.integrations.sbt.BloopPlugin, _root_.net.virtualvoid.sbt.graph.DependencyGraphPlugin, _root_.scala.meta.metals.MetalsPlugin, _root_.bintray.BintrayPlugin"
             ]
         },
         "test" : {
@@ -243,6 +255,18 @@
         },
         "resolution" : {
             "modules" : [
+                {
+                    "organization" : "io.netty",
+                    "name" : "netty",
+                    "version" : "3.10.0.Final",
+                    "configurations" : "default",
+                    "artifacts" : [
+                        {
+                            "name" : "netty",
+                            "path" : "/home/mark/.cache/coursier/v1/https/repo1.maven.org/maven2/io/netty/netty/3.10.0.Final/netty-3.10.0.Final.jar"
+                        }
+                    ]
+                },
                 {
                     "organization" : "io.swagger",
                     "name" : "swagger-annotations",
@@ -360,6 +384,18 @@
                     ]
                 },
                 {
+                    "organization" : "org.json4s",
+                    "name" : "json4s-core_2.12",
+                    "version" : "3.4.2",
+                    "configurations" : "default",
+                    "artifacts" : [
+                        {
+                            "name" : "json4s-core_2.12",
+                            "path" : "/home/mark/.cache/coursier/v1/https/repo1.maven.org/maven2/org/json4s/json4s-core_2.12/3.4.2/json4s-core_2.12-3.4.2.jar"
+                        }
+                    ]
+                },
+                {
                     "organization" : "org.scalameta",
                     "name" : "trees_2.12",
                     "version" : "4.3.0",
@@ -408,6 +444,18 @@
                         {
                             "name" : "cats-core_2.12",
                             "path" : "/home/mark/.cache/coursier/v1/https/repo1.maven.org/maven2/org/typelevel/cats-core_2.12/2.0.0/cats-core_2.12-2.0.0.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization" : "org.foundweekends",
+                    "name" : "bintry_2.12",
+                    "version" : "0.5.2",
+                    "configurations" : "default",
+                    "artifacts" : [
+                        {
+                            "name" : "bintry_2.12",
+                            "path" : "/home/mark/.cache/coursier/v1/https/repo1.maven.org/maven2/org/foundweekends/bintry_2.12/0.5.2/bintry_2.12-0.5.2.jar"
                         }
                     ]
                 },
@@ -492,6 +540,18 @@
                         {
                             "name" : "swagger-models",
                             "path" : "/home/mark/.cache/coursier/v1/https/repo1.maven.org/maven2/io/swagger/swagger-models/1.6.0/swagger-models-1.6.0.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization" : "net.databinder.dispatch",
+                    "name" : "dispatch-core_2.12",
+                    "version" : "0.12.0",
+                    "configurations" : "default",
+                    "artifacts" : [
+                        {
+                            "name" : "dispatch-core_2.12",
+                            "path" : "/home/mark/.cache/coursier/v1/https/repo1.maven.org/maven2/net/databinder/dispatch/dispatch-core_2.12/0.12.0/dispatch-core_2.12-0.12.0.jar"
                         }
                     ]
                 },
@@ -618,6 +678,42 @@
                     ]
                 },
                 {
+                    "organization" : "com.ning",
+                    "name" : "async-http-client",
+                    "version" : "1.9.11",
+                    "configurations" : "default",
+                    "artifacts" : [
+                        {
+                            "name" : "async-http-client",
+                            "path" : "/home/mark/.cache/coursier/v1/https/repo1.maven.org/maven2/com/ning/async-http-client/1.9.11/async-http-client-1.9.11.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization" : "net.databinder.dispatch",
+                    "name" : "dispatch-json4s-native_2.12",
+                    "version" : "0.12.0",
+                    "configurations" : "default",
+                    "artifacts" : [
+                        {
+                            "name" : "dispatch-json4s-native_2.12",
+                            "path" : "/home/mark/.cache/coursier/v1/https/repo1.maven.org/maven2/net/databinder/dispatch/dispatch-json4s-native_2.12/0.12.0/dispatch-json4s-native_2.12-0.12.0.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization" : "com.thoughtworks.paranamer",
+                    "name" : "paranamer",
+                    "version" : "2.8",
+                    "configurations" : "default",
+                    "artifacts" : [
+                        {
+                            "name" : "paranamer",
+                            "path" : "/home/mark/.cache/coursier/v1/https/repo1.maven.org/maven2/com/thoughtworks/paranamer/paranamer/2.8/paranamer-2.8.jar"
+                        }
+                    ]
+                },
+                {
                     "organization" : "com.google.guava",
                     "name" : "guava",
                     "version" : "27.0.1-android",
@@ -654,6 +750,30 @@
                         {
                             "name" : "jackson-databind",
                             "path" : "/home/mark/.cache/coursier/v1/https/repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson-databind/2.10.1/jackson-databind-2.10.1.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization" : "org.json4s",
+                    "name" : "json4s-scalap_2.12",
+                    "version" : "3.4.2",
+                    "configurations" : "default",
+                    "artifacts" : [
+                        {
+                            "name" : "json4s-scalap_2.12",
+                            "path" : "/home/mark/.cache/coursier/v1/https/repo1.maven.org/maven2/org/json4s/json4s-scalap_2.12/3.4.2/json4s-scalap_2.12-3.4.2.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization" : "org.slf4j",
+                    "name" : "slf4j-nop",
+                    "version" : "1.7.7",
+                    "configurations" : "default",
+                    "artifacts" : [
+                        {
+                            "name" : "slf4j-nop",
+                            "path" : "/home/mark/.cache/coursier/v1/https/repo1.maven.org/maven2/org/slf4j/slf4j-nop/1.7.7/slf4j-nop-1.7.7.jar"
                         }
                     ]
                 },
@@ -904,6 +1024,18 @@
                     ]
                 },
                 {
+                    "organization" : "org.foundweekends",
+                    "name" : "sbt-bintray",
+                    "version" : "0.5.4",
+                    "configurations" : "compile",
+                    "artifacts" : [
+                        {
+                            "name" : "sbt-bintray",
+                            "path" : "/home/mark/.cache/coursier/v1/https/repo.scala-sbt.org/scalasbt/sbt-plugin-releases/org.foundweekends/sbt-bintray/scala_2.12/sbt_1.0/0.5.4/jars/sbt-bintray.jar"
+                        }
+                    ]
+                },
+                {
                     "organization" : "commons-io",
                     "name" : "commons-io",
                     "version" : "2.4",
@@ -924,6 +1056,18 @@
                         {
                             "name" : "jsr305",
                             "path" : "/home/mark/.cache/coursier/v1/https/repo1.maven.org/maven2/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization" : "org.json4s",
+                    "name" : "json4s-native_2.12",
+                    "version" : "3.4.2",
+                    "configurations" : "default",
+                    "artifacts" : [
+                        {
+                            "name" : "json4s-native_2.12",
+                            "path" : "/home/mark/.cache/coursier/v1/https/repo1.maven.org/maven2/org/json4s/json4s-native_2.12/3.4.2/json4s-native_2.12-3.4.2.jar"
                         }
                     ]
                 },
@@ -972,6 +1116,18 @@
                         {
                             "name" : "common_2.12",
                             "path" : "/home/mark/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scalameta/common_2.12/4.3.0/common_2.12-4.3.0.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization" : "org.json4s",
+                    "name" : "json4s-ast_2.12",
+                    "version" : "3.4.2",
+                    "configurations" : "default",
+                    "artifacts" : [
+                        {
+                            "name" : "json4s-ast_2.12",
+                            "path" : "/home/mark/.cache/coursier/v1/https/repo1.maven.org/maven2/org/json4s/json4s-ast_2.12/3.4.2/json4s-ast_2.12-3.4.2.jar"
                         }
                     ]
                 },

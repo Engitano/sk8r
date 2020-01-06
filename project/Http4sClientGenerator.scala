@@ -34,63 +34,39 @@ class Http4sClientGenerator(swagger: Swagger) {
       }
   }
 
-  private def toVariableType(defName: String, ety: ScalaSwaggerEntity): Type =
-    ety match {
-      case CaseClass(name, _) => Type.Select(toPackage(defName), name)
-      case TypeAlias(name, _) =>
-        Type.Select(
-          Term.Select(toPackage(defName), Term.Name(name.value)),
-          Type.Name("Alias")
-        )
-    }
-
   def generateClient(
       models: Map[String, ScalaSwaggerEntity]
   ): List[Stat] = {
-    val uriParamRegex = "\\{([^\\}]+)\\}".r
-    val funcs = swagger.getPaths().asScala.flatMap {
+    val funcs = swagger.getPaths.asScala.flatMap {
       case (uri, path) =>
-        path.getOperationMap().asScala.toMap.map {
+        path.getOperationMap().asScala.filter(!_._2.getOperationId.contains("beta")).toMap.map {
           case (method, operation) =>
-            val funcName         = operation.getOperationId()
-            val uriParams        = uriParamRegex.findAllMatchIn(uri)
-            val uriSegments      = uriParams.map(_.group(0))
+            val funcName         = operation.getOperationId
             val uriConstSegments = uri.split("\\{[^\\}]+\\}", -1).toList
             val queryParams = operation
-              .getParameters()
+              .getParameters
               .asScala
               .collect {
                 case p: QueryParameter =>
                   val prop =
-                    PropertyBuilder.build(p.getType(), p.getFormat(), null)
+                    PropertyBuilder.build(p.getType, p.getFormat, null)
                   val realTpe = mapper.map(prop)
                   Term.Param(List.empty, Name("q" + p.getName.capitalize), Some(realTpe), if(!p.getRequired) Some(Term.Name("None")) else None)
               }
               .toList
             val pathParams = operation
-              .getParameters()
+              .getParameters
               .asScala
               .collect {
                 case p: PathParameter =>
                   val prop =
-                    PropertyBuilder.build(p.getType(), p.getFormat(), null)
+                    PropertyBuilder.build(p.getType, p.getFormat, null)
                   val realTpe = mapper.mapNonOptional(prop)
                   Term.Param(List.empty, Name("p" + p.getName.capitalize), Some(realTpe), None)
               }
               .toList
-            val headerParams = operation
-              .getParameters()
-              .asScala
-              .collect {
-                case p: HeaderParameter =>
-                  val prop =
-                    PropertyBuilder.build(p.getType(), p.getFormat(), null)
-                  val realTpe = mapper.map(prop)
-                  Term.Param(List.empty, Name("h" + p.getName.capitalize), Some(realTpe), if(!p.getRequired) Some(Term.Name("None")) else None)
-              }
-              .toList
             val bodyParams = operation
-              .getParameters()
+              .getParameters
               .asScala
               .collect {
                 case bp: BodyParameter =>
@@ -102,10 +78,10 @@ class Http4sClientGenerator(swagger: Swagger) {
               .toList
             // org.http4s.Request(method = Method.GET, uri = Uri.uri(""), headers = Headers(List(Header("","")),body = null))
             val resultType = operation
-              .getResponses()
+              .getResponses
               .asScala
               .collectFirst {
-                case (c, r) if c.startsWith("20") => mapper.mapNonOptional(r.getSchema())
+                case (c, r) if c.startsWith("20") => mapper.mapNonOptional(r.getSchema)
               }
               .getOrElse(Type.Name("Unit"))
 
@@ -114,14 +90,10 @@ class Http4sClientGenerator(swagger: Swagger) {
               List(
                 Authorization(Credentials.Token(AuthScheme.Bearer, ${Term.Name("bearerToken")})),
                 Accept(application.json)
-              ) ++ 
-                List(..${headerParams
-              .map(h => q"""Header(${Lit.String(h.name.value)}, ${Term.Name(h.name.value)}.toString)""")}
               ))"""
             val query = q"""Map(..${queryParams.map(
-              u => q"${Lit.String(u.name.value)} -> Seq(${Term.Name(u.name.value)}.toString)"
+              u => q"${Lit.String(u.name.value)} -> Seq(${Term.Name(u.name.value)}.map(_.toString)).flatten"
             )})"""
-            val uriWithSegments = pathParams.zip(uriSegments.toList)
             val reqPath = Term.Interpolate(
               Term.Name("s"),
               uriConstSegments.map(u => Lit.String(u)),
@@ -133,14 +105,13 @@ class Http4sClientGenerator(swagger: Swagger) {
             )
             // val addBody = if(bodyParams.nonEmpty) q"withBody(${Term.Name(bodyParams.head.name.value)})" else q""
             (
-              q"def ${Term.Name(funcName)}(..${pathParams.toList ++ bodyParams.toList ++ queryParams.toList ++ headerParams.toList}): F[$resultType]",
+              q"def ${Term.Name(funcName)}(..${pathParams.toList ++ bodyParams.toList ++ queryParams.toList}): F[$resultType]",
               q"""def ${Term
-                .Name(funcName)}(..${pathParams.toList ++ bodyParams.toList ++ queryParams.toList ++ headerParams.toList}): F[$resultType] = 
+                .Name(funcName)}(..${pathParams.toList ++ bodyParams.toList ++ queryParams.toList}): F[$resultType] = 
                 tokenSource.getBearerToken.flatMap { bearerToken =>
                   val headers = $headerTerm
-                  val uri = baseUri.withPath(${reqPath}).setQueryParams[String, String](${query})
-                  val request = Request[F](method = ${reqMethod}, uri = uri, headers = headers)
-                  val requestWithBody = ${if(bodyParams.nonEmpty) q"request.withBody(${Term.Name(bodyParams.head.name.value)})" else q"request" } 
+                  val request = Request[F](method = ${reqMethod}, uri = baseUri.withPath(${reqPath}).setQueryParams[String, String](${query}), headers = headers)
+                  val requestWithBody = ${if(bodyParams.nonEmpty) q"request.withEntity(${Term.Name(bodyParams.head.name.value)})" else q"request" } 
                   httpClient.expect[${resultType}](requestWithBody)
                 }"""
             )
