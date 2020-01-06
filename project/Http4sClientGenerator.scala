@@ -152,7 +152,7 @@ class Http4sClientGenerator(swagger: Swagger) {
       ..${funcs.map(_._1).toList}
     }""",
     q"""object KubernetesClient{
-      def apply[F[_]: ConcurrentEffect](httpClient: Client[F], baseUri: Uri, tokenSource: TokenSource[F]): KubernetesClient[F] = new KubernetesClient[F] {
+      def apply[F[_]: Sync](httpClient: Client[F], baseUri: Uri, tokenSource: TokenSource[F]): KubernetesClient[F] = new KubernetesClient[F] {
         ..${funcs.map(_._2).toList}
       }
     }""")
