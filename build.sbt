@@ -33,7 +33,13 @@ lazy val root = (project in file("."))
     bintrayOrganization := Some("engitano"),
     bintrayPackageLabels := Seq("kubernetes", "scala"),
     sourceGenerators in Compile += Def.task {
-      CodeGen.generate((sourceDirectory in Compile).value / "scala", (resourceDirectory in Compile).value / "eks.k8s.api.json")
+      CodeGen.generate(
+        (sourceDirectory in Compile).value / "scala",
+        (resourceDirectory in Compile).value / "eks.k8s.api.json",
+       Seq("Pod",  "Deployment", "Service", "Ingress",
+         "ConfigMap", "ServiceAccount", "DaemonSet",
+         "Job", "StatefulSet", "Namespace")
+      )
     }.taskValue
   )
 

@@ -16,8 +16,7 @@ class SwaggerScalaTypeMap(swagger: Swagger) {
   def isOption(thisType: Type): Boolean = isType("Option", thisType)
 
   def map(p: Property): Type = {
-    if (!p.getRequired && !p.isInstanceOf[MapProperty] && !p
-          .isInstanceOf[ArrayProperty])
+    if (!p.getRequired)
       t"Option[${mapNonOptional(p)}]"
     else
       mapNonOptional(p)

@@ -8,13 +8,13 @@ import java.io.File
 
 object CodeGen {
 
-  def generate(pathPrefix: File, apiFile: File): Seq[File] = {
+  def generate(pathPrefix: File, apiFile: File, k8sTypes: Seq[String]): Seq[File] = {
 
     val json      = Source.fromFile(apiFile).getLines.mkString
     val swagger   = new SwaggerParser().parse(json)
     val models    = new ModelGenerator(swagger).generate()
     val clientGen = new Http4sClientGenerator(swagger)
-    val client    = clientGen.generateClient(models.toMap)
+    val client    = clientGen.generateClient(models.toMap, k8sTypes)
 
     val prefix = pathPrefix
 

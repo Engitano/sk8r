@@ -39,9 +39,7 @@ class ModelGenerator(swagger: Swagger) {
       case (pname, prop) =>
         val tpe = mapper.map(prop)
         val default = prop match {
-          case _:ArrayProperty => Some(q"Seq()")
-          case _:MapProperty => Some(q"Map()")
-          case _ if (!prop.getRequired) => Some(q"None")
+          case _ if !prop.getRequired => Some(q"None")
           case _ => None
         }
         Term.Param(

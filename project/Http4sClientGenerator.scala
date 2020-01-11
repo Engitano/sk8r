@@ -19,6 +19,7 @@ class Http4sClientGenerator(swagger: Swagger) {
       q"import org.http4s.circe.CirceEntityDecoder._",
       q"import io.circe.generic.auto._",
       q"import cats.effect._",
+      q"import cats.syntax.functor._",
       q"import cats.syntax.flatMap._",
       q"import CirceSerdes._"
     )
@@ -35,11 +36,21 @@ class Http4sClientGenerator(swagger: Swagger) {
   }
 
   def generateClient(
-      models: Map[String, ScalaSwaggerEntity]
+      models: Map[String, ScalaSwaggerEntity],
+      k8sTypes: Seq[String]
   ): List[Stat] = {
     val funcs = swagger.getPaths.asScala.flatMap {
       case (uri, path) =>
-        path.getOperationMap().asScala.toMap.map {
+        path.getOperationMap().asScala.filter {
+          case (_, op) =>
+            op.getVendorExtensions
+              .asScala
+              .get("x-kubernetes-group-version-kind")
+                .map(_.asInstanceOf[java.util.Map[String, String]])
+                .map(_.asScala)
+                .flatMap(_.get("kind"))
+                .exists(s => k8sTypes.contains(s))
+        } .toMap.map {
           case (method, operation) =>
             val funcName         = operation.getOperationId
             val uriConstSegments = uri.split("\\{[^\\}]+\\}", -1).toList
@@ -115,8 +126,7 @@ class Http4sClientGenerator(swagger: Swagger) {
               q"def ${Term.Name(funcName)}(..${pathParams.toList ++ bodyParams.toList ++ queryParams.toList}): F[$resultType]",
               q"""def ${Term
                 .Name(funcName)}(..${pathParams.toList ++ bodyParams.toList ++ queryParams.toList}): F[$resultType] = 
-                tokenSource.getBearerToken.flatMap { bearerToken =>
-                  val headers = $headerTerm
+                defaultHeaders.flatMap { headers =>
                   val request = ${reqWithBody}  
                   httpClient.expect[${resultType}](request)
                 }"""
@@ -130,6 +140,9 @@ class Http4sClientGenerator(swagger: Swagger) {
     }""",
     q"""object KubernetesClient{
       def apply[F[_]: Sync](httpClient: Client[F], baseUri: Uri, tokenSource: TokenSource[F]): KubernetesClient[F] = new KubernetesClient[F] {
+        private def defaultHeaders: F[Headers] = tokenSource.getBearerToken.map { bearerToken =>
+          Headers(List(Authorization(Credentials.Token(AuthScheme.Bearer, bearerToken)), Accept(application.json)))
+        }
         ..${funcs.map(_._2).toList}
       }
     }""")
