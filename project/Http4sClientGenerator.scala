@@ -54,7 +54,7 @@ class Http4sClientGenerator(swagger: Swagger) {
           case (method, operation) =>
             val funcName         = operation.getOperationId
             val uriConstSegments = uri.split("\\{[^\\}]+\\}", -1).toList
-            val queryParams = operation
+            val queryParams: List[(String, Term.Param)] = operation
               .getParameters
               .asScala
               .filter(_.getName != "pretty")
@@ -63,7 +63,7 @@ class Http4sClientGenerator(swagger: Swagger) {
                   val prop =
                     PropertyBuilder.build(p.getType, p.getFormat, null)
                   val realTpe = mapper.map(prop)
-                  Term.Param(List.empty, Name("q" + p.getName.capitalize), Some(realTpe), if(!p.getRequired) Some(Term.Name("None")) else None)
+                  p.getName -> Term.Param(List.empty, Name("q" + p.getName.capitalize), Some(realTpe), if(!p.getRequired) Some(Term.Name("None")) else None)
               }
               .toList
             val pathParams = operation
@@ -104,7 +104,7 @@ class Http4sClientGenerator(swagger: Swagger) {
                 Accept(application.json)
               ))"""
             val query = q"""Map(..${queryParams.map(
-              u => q"${Lit.String(u.name.value)} -> Seq(${Term.Name(u.name.value)}.map(_.toString)).flatten"
+              u => q"${Lit.String(u._1)} -> Seq(${Term.Name(u._2.name.value)}.map(_.toString)).flatten"
             )})"""
             val reqPath = Term.Interpolate(
               Term.Name("s"),
@@ -123,9 +123,9 @@ class Http4sClientGenerator(swagger: Swagger) {
             }
             // val addBody = if(bodyParams.nonEmpty) q"withBody(${Term.Name(bodyParams.head.name.value)})" else q""
             (
-              q"def ${Term.Name(funcName)}(..${pathParams.toList ++ bodyParams.toList ++ queryParams.toList}): F[$resultType]",
+              q"def ${Term.Name(funcName)}(..${pathParams.toList ++ bodyParams.toList ++ queryParams.map(_._2).toList}): F[$resultType]",
               q"""def ${Term
-                .Name(funcName)}(..${pathParams.toList ++ bodyParams.toList ++ queryParams.toList}): F[$resultType] = 
+                .Name(funcName)}(..${pathParams.toList ++ bodyParams.toList ++ queryParams.map(_._2).toList}): F[$resultType] = 
                 defaultHeaders.flatMap { headers =>
                   val request = ${reqWithBody}  
                   httpClient.expect[${resultType}](request)
