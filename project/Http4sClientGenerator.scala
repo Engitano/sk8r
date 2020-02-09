@@ -105,7 +105,7 @@ class Http4sClientGenerator(swagger: Swagger) {
               ))"""
             val query = q"""Map(..${queryParams.map(
               u => q"${Lit.String(u._1)} -> Seq(${Term.Name(u._2.name.value)}.map(_.toString)).flatten"
-            )})"""
+            )}).filter(_._2.nonEmpty)"""
             val reqPath = Term.Interpolate(
               Term.Name("s"),
               uriConstSegments.map(u => Lit.String(u)),
